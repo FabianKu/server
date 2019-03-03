@@ -35,5 +35,14 @@ public class UserService {
         userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
+
     }
+
+    public boolean check_password(String username,String password){
+        User tryUser=userRepository.findByUsername(username);
+        if(tryUser.getPassword().equals(password)){return (true);}
+        else{return (false);}
+    }
+
+
 }
