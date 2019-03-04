@@ -29,4 +29,9 @@ public class UserController {
         return(service.check_password(username,password));
     }
 
+    @GetMapping("/get_user")
+    User get_the_user(@RequestParam String username){
+        return(service.getUserbyusername(username));
+    }
+
 }

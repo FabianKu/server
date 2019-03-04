@@ -9,6 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+//import date object class;
+import java.util.Date;
+
+
 @Entity
 public class User implements Serializable {
 	
@@ -31,6 +35,10 @@ public class User implements Serializable {
 	
 	@Column(nullable = false, unique = true) 
 	private String token;
+
+	//added creation date variable
+	@Column
+	private String creation_date;
 
 	@Column(nullable = false)
 	private UserStatus status;
@@ -58,6 +66,15 @@ public class User implements Serializable {
 
 	//added the getPassword function (for the repository to get the password?)
 	public String getPassword(){return password;}
+
+	//added the get Creation date function to get the creation date;
+	public String getCreation_date() {
+		return creation_date;
+	}
+
+	public void setCreation_date(String creation_date) {
+		this.creation_date = creation_date;
+	}
 
 	public String getUsername() { return username; }
 
