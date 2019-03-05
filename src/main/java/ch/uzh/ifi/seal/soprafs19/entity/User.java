@@ -22,6 +22,9 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+
+	@Column
+	private String date_birth;
 	
 	@Column(nullable = false) 
 	private String name;
@@ -50,6 +53,10 @@ public class User implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public void setDate_birth(String birth){this.date_birth=birth;}
+
+	public String getDate_birth(){return (this.date_birth);}
 
 	public String getName() {
 		return name;

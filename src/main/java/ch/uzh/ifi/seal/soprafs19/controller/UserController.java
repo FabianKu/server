@@ -34,4 +34,10 @@ public class UserController {
         return(service.getUserbyusername(username));
     }
 
+
+    @GetMapping("/user_for_overview")
+    User get_the_user_for_overview(@RequestParam String name){
+        User tryUser=this.service.getUserbyusername(name);
+        return (tryUser);
+    }
 }
