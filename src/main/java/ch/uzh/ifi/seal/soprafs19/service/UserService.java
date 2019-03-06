@@ -68,6 +68,21 @@ public class UserService {
         return(userRepository.findByUsername(name));
     }
 
+    public User getUserbyID(String id){
+        long il = Long.parseLong(id);
+        return(userRepository.findById(il));
+    }
+
+    public boolean check_password_to_edit(String id, String password){
+        User realUser=getUserbyID(id);
+        if(realUser.getPassword().equals(password)){
+            return (true);
+        }
+        else{
+            return (false);
+        }
+    }
+
 
 
 

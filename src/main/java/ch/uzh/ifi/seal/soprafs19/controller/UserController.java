@@ -36,8 +36,14 @@ public class UserController {
 
 
     @GetMapping("/user_for_overview")
-    User get_the_user_for_overview(@RequestParam String name){
-        User tryUser=this.service.getUserbyusername(name);
+    User get_the_user_for_overview(@RequestParam String id){
+        User tryUser=this.service.getUserbyID(id);
         return (tryUser);
     }
+
+    @GetMapping("/password_to_edit")
+    Boolean check_password_to_edit(@RequestParam String id,@RequestParam String password){
+        return(service.check_password_to_edit(id,password));
+    }
+
 }
