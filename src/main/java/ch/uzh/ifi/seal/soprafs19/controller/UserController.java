@@ -4,6 +4,8 @@ import ch.uzh.ifi.seal.soprafs19.entity.User;
 import ch.uzh.ifi.seal.soprafs19.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 public class UserController {
 
@@ -46,4 +48,21 @@ public class UserController {
         return(service.check_password_to_edit(id,password));
     }
 
+    @PutMapping("/change")
+    User change_username_birth_date(@RequestBody User user){//Map<String, String> json){
+       // String user_name=json.get("username");
+        //String date_of_birth=json.get("date_birth");
+        //String a=hold.getBirthday();
+        return (user);
+    }
+
+    @CrossOrigin
+    @PutMapping(value = "/change/{userId}")
+    void changeUser(@PathVariable String userId, @RequestBody Map<String, String> json){
+        String user_name=json.get("username");
+        String date_of_birth=json.get("birthday");
+        service.change_user(userId, user_name, date_of_birth);
+    }
 }
+
+

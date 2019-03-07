@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.Date;
 import java.util.Calendar;
@@ -82,6 +83,20 @@ public class UserService {
             return (false);
         }
     }
+
+
+    public void change_user(String id, String uname, String birthday){
+        User realuser=getUserbyID(id);
+        if (uname!=null && realuser!=null){
+            realuser.setUsername(uname);
+        }
+        if (birthday!=null && realuser!=null){
+            realuser.setDate_birth(birthday);
+        }
+    }
+
+
+
 
 
 
