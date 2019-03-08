@@ -50,8 +50,9 @@ public class User implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(String id) {
+		long long_id=Long.parseLong(id);
+		this.id = long_id;
 	}
 
 	public void setDate_birth(String birth){this.date_birth=birth;}
