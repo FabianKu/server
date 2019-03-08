@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
@@ -43,6 +44,13 @@ public class UserService {
         if(userRepository.existsByUsername(newUser.getUsername())) {
             return(null);
         }
+
+        //test if the entered date is really a date
+        try {
+            Date date1 = new SimpleDateFormat("dd/mm/yyyy").parse(newUser.getDate_birth());
+        }catch(ParseException err){
+            return(null);
+        };
 
         //added set function to store the creation date;
         set_creation_date(newUser);
