@@ -6,9 +6,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 @RestController
 public class UserController {
 
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final UserService service;
 
     UserController(UserService service) {
@@ -39,6 +46,7 @@ public class UserController {
 
     @GetMapping("/user_for_overview")
     User get_the_user_for_overview(@RequestParam String id){
+        logger.info("get the user with id"+ id);
         User tryUser=this.service.getUserbyID(id);
         return (tryUser);
     }
