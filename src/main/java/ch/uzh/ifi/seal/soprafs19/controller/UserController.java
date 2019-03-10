@@ -48,6 +48,7 @@ public class UserController {
     User get_the_user_for_overview(@RequestParam String id){
         logger.info("get the user with id"+ id);
         User tryUser=this.service.getUserbyID(id);
+        logger.info("got the user and returns it: " +tryUser.getUsername());
         return (tryUser);
     }
 

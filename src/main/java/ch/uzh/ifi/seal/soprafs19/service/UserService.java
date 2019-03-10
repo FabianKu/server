@@ -24,8 +24,6 @@ import java.util.UUID;
 @Transactional
 public class UserService {
 
-    private final Logger log = LoggerFactory.getLogger(UserService.class);
-
     private final UserRepository userRepository;
 
 
@@ -57,7 +55,6 @@ public class UserService {
         //added set function to store the creation date;
         set_creation_date(newUser);
         userRepository.save(newUser);
-        log.debug("Created Information for User: {}", newUser);
         return newUser;
 
     }
