@@ -43,7 +43,7 @@ public class UserController {
         return(service.getUserbyusername(username));
     }
 
-
+    @CrossOrigin
     @GetMapping("/user_for_overview")
     User get_the_user_for_overview(@RequestParam String id){
         logger.info("get the user with id"+ id);
