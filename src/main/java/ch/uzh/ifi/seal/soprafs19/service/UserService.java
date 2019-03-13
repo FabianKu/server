@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -42,15 +43,15 @@ public class UserService {
 
         //find out if username already exists
         if(userRepository.existsByUsername(newUser.getUsername())) {
-            throw new HttpClientErrorException(HttpStatus.CONFLICT, "Username already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
         }
 
         //test if the entered date is really a date
         try {
             Date date1 = new SimpleDateFormat("dd/mm/yyyy").parse(newUser.getDate_birth());
         }catch(ParseException err){
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The date wasn't entered properly");
-        };
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The date wasn't entered properly");
+        }
 
         //added set function to store the creation date;
         set_creation_date(newUser);
@@ -87,7 +88,7 @@ public class UserService {
     public long check_with_id_if_User_exists(String id){
         long long_id = Long.parseLong(id);
         if (!userRepository.existsById(long_id)){
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "ID wasn't found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ID wasn't found");
         }
         return (long_id);
     }
@@ -116,7 +117,7 @@ public class UserService {
                     realuser.setDate_birth(birthday);
                 }
             } catch (ParseException err) {
-                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The date wasn't entered properly");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The date wasn't entered properly");
             }
             ;
         }
