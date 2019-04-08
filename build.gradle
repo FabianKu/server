@@ -43,9 +43,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("com.fasterxml.jackson.core:jackson-databind")
     runtime('com.h2database:h2')
-    compile('com.fasterxml.jackson.databind.ObjectMapper')
-    compile('org.springframework.http.MediaType')
 }
 
 test {
