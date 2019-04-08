@@ -35,7 +35,7 @@ public class UserController {
 
     @GetMapping("/password")
     Boolean check_password(@RequestParam String username,@RequestParam String password){
-        return(service.check_password(username,password));
+        return(service.checkPassword(username,password));
     }
 
     @GetMapping("/get_user")
@@ -54,7 +54,7 @@ public class UserController {
 
     @GetMapping("/password_to_edit")
     Boolean check_password_to_edit(@RequestParam String id,@RequestParam String password){
-        return(service.check_password_to_edit(id,password));
+        return(service.checkPasswordToEdit(id,password));
     }
 
     @CrossOrigin
@@ -62,7 +62,7 @@ public class UserController {
     void changeUser(@PathVariable String userId, @RequestBody Map<String, String> json){
         String user_name=json.get("username");
         String date_of_birth=json.get("birthday");
-        service.change_user(userId, user_name, date_of_birth);
+        service.changeUser(userId, user_name, date_of_birth);
     }
 }
 

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 
 //import date object class;
 import java.util.Date;
+import java.util.LinkedHashSet;
 
 
 @Entity
@@ -55,7 +56,7 @@ public class User implements Serializable {
 		this.id = long_id;
 	}
 
-	public void setDate_birth(String birth){this.date_birth=birth;}
+	public void setDateBirth(String birth){this.date_birth=birth;}
 
 	public String getDate_birth(){return (this.date_birth);}
 
@@ -114,5 +115,22 @@ public class User implements Serializable {
 		}
 		User user = (User) o;
 		return this.getId().equals(user.getId());
+	}
+
+	//LOGIN ENDS
+	//INVITATIONS
+
+	//ATTRIBUTES
+	@Column
+	private LinkedHashSet<Long> invitations = new LinkedHashSet<Long>();
+
+	//GETTERS AND SETTERS
+	public void receiveInvitation(long id){
+		//adds the Id at the end of the LinkedHashSet
+		invitations.add(id);
+	}
+
+	public LinkedHashSet<Long> getAllInvitations(){
+		return (invitations);
 	}
 }
