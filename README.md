@@ -1,1 +1,1 @@
-Server for Webapplication of the Board game Santorini
+Server for Webapplication of the board game Santorini
