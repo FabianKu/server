@@ -1,6 +1,7 @@
 package ch.uzh.ifi.seal.soprafs19.model;
 
 import ch.uzh.ifi.seal.soprafs19.entity.Player;
+import ch.uzh.ifi.seal.soprafs19.entity.Worker;
 
 public class HighlightB {
     //CONSTRUCTOR

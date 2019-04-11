@@ -1,7 +1,4 @@
-package ch.uzh.ifi.seal.soprafs19.model;
-
-import ch.uzh.ifi.seal.soprafs19.entity.Game;
-import ch.uzh.ifi.seal.soprafs19.entity.Player;
+package ch.uzh.ifi.seal.soprafs19.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

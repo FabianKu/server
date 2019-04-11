@@ -13,13 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
 
@@ -157,6 +154,10 @@ public class UserService {
     //a User with an userId started looking for other Users to play with
     public void startMatchmaking(long userId){
         //start looking for other players
+    }
+
+    public boolean isInGame(long userId){
+        return this.userRepository.findById(userId).inGame;
     }
 
     //MATCHMAKING ENDS

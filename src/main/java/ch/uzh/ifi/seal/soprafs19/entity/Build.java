@@ -1,4 +1,4 @@
-package ch.uzh.ifi.seal.soprafs19.model;
+package ch.uzh.ifi.seal.soprafs19.entity;
 
 import javax.persistence.*;
 

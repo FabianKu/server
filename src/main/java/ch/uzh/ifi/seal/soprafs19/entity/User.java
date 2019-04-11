@@ -47,6 +47,9 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private UserStatus status;
 
+	@Column(nullable = false)
+	public boolean inGame=false;
+
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +57,14 @@ public class User implements Serializable {
 	public void setId(String id) {
 		long long_id=Long.parseLong(id);
 		this.id = long_id;
+	}
+
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
 	}
 
 	public void setDateBirth(String birth){this.date_birth=birth;}

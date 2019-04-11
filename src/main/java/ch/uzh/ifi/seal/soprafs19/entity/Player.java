@@ -1,22 +1,20 @@
 package ch.uzh.ifi.seal.soprafs19.entity;
 
-import ch.uzh.ifi.seal.soprafs19.godCards.NormalPlayer;
-import ch.uzh.ifi.seal.soprafs19.model.Worker;
+import ch.uzh.ifi.seal.soprafs19.entity.godCards.NormalPlayer;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Player implements Serializable {
     //CONSTRUCTOR
     public Player(){};
-    public Player(long userI, int availableMoves, int availableBuilds) {
+    public Player(long userId) {
         this.userId = userId;
-        this.availableMoves = availableMoves;
-        this.availableBuilds = availableBuilds;
-        List<Worker> playersWorkers= new ArrayList<Worker>();
+        //Initiate the correct godCard
+        //how to find the right card?
+        this.godCard= new NormalPlayer();
+
     }
 
     //ATTRIBUTES
@@ -24,20 +22,15 @@ public class Player implements Serializable {
     @GeneratedValue
     private Long playerId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "gameId")
+    private Game game;
+
     @Column
     private long userId;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Worker> playersWorkers;
-
-    @Column(nullable = false)
-    private int availableMoves;
-
-    @Column
-    private int availableBuilds;
-
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(nullable = false, referencedColumnName = "godCardId")
+    @JoinColumn(nullable = false,referencedColumnName = "godCardId")
     private NormalPlayer godCard;
 
     //GETTERS AND SETTERS
@@ -57,31 +50,15 @@ public class Player implements Serializable {
         this.userId = userId;
     }
 
-    public List<Worker> getPlayersWorkers() {
-        return playersWorkers;
-    }
-
-    public void setPlayersWorkers(Worker worker) {
-        this.playersWorkers.add(worker);
-    }
-
-    public int getAvailableMoves() {
-        return availableMoves;
-    }
-
-    public void setAvailableMoves(int availableMoves) {
-        this.availableMoves = availableMoves;
-    }
-
-    public int getAvailableBuilds() {
-        return availableBuilds;
-    }
-
-    public void setAvailableBuilds(int availableBuilds) {
-        this.availableBuilds = availableBuilds;
-    }
-
     public NormalPlayer getGodCard(){return godCard;}
 
     public void setGodCard(NormalPlayer godCard){this.godCard=godCard;}
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

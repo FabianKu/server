@@ -65,7 +65,7 @@ public class InvitationControllerTest {
         User testUser3 = new User();
         testUser3.setName("testName");
         testUser3.setUsername("testUsername3");
-        testUser3.setDateBirth("10/10/2010");
+        testUser3.setDateBirth("17/10/2017");
         testUser3.setPassword("testPassword");
         User newUser3 = userService.createUser(testUser3);
 
@@ -73,7 +73,7 @@ public class InvitationControllerTest {
         User testUser7 = new User();
         testUser7.setName("testName");
         testUser7.setUsername("testUsername7");
-        testUser7.setDateBirth("10/10/2010");
+        testUser7.setDateBirth("17/10/2017");
         testUser7.setPassword("testPassword");
         User newUser7 = userService.createUser(testUser7);
 
@@ -97,7 +97,7 @@ public class InvitationControllerTest {
         User testUser4 = new User();
         testUser4.setName("testName");
         testUser4.setUsername("testUsername4");
-        testUser4.setDateBirth("10/10/2010");
+        testUser4.setDateBirth("17/10/2017");
         testUser4.setPassword("testPassword");
 
         User newUser4 = userService.createUser(testUser4);
@@ -126,7 +126,7 @@ public class InvitationControllerTest {
         User testUser8 = new User();
         testUser8.setName("testName");
         testUser8.setUsername("testUsername8");
-        testUser8.setDateBirth("10/10/2010");
+        testUser8.setDateBirth("17/10/2017");
         testUser8.setPassword("testPassword");
         User newUser8 = userService.createUser(testUser8);
 

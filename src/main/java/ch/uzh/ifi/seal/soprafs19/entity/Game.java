@@ -1,25 +1,35 @@
 package ch.uzh.ifi.seal.soprafs19.entity;
 
-import ch.uzh.ifi.seal.soprafs19.model.Action;
-import ch.uzh.ifi.seal.soprafs19.model.Field;
-import ch.uzh.ifi.seal.soprafs19.model.Turn;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class Game implements Serializable {
     //CONSTRUCTOR
     public Game(){};
-    public Game(Player player1, Player player2, List<Field> board, int isTerminated, Turn turn) {
-        this.player1 = player1;
-        this.player2 = player2;
-        this.board = board;
+    public Game(boolean isTerminated, Turn turn) {
         this.isTerminated = isTerminated;
         this.turn=turn;
         List<Action> history=new ArrayList<Action>();
+        this.history=history;
+        List<Field> board = new ArrayList<Field>();
+        this.board=createBoard(board);
+        List<Player> players=new ArrayList<Player>();
+        this.players=players;
+    }
+
+    //USEFUL FUNCTIONS
+    private List<Field> createBoard(List<Field> board){
+        for (int i=1;i!=6;i++){
+            for(int j=1;j!=6;j++){
+                Field field=new Field(j,i,0,null,this);
+                board.add(field);
+            }
+        }
+        return(board);
     }
 
     //ATTRIBUTES
@@ -27,17 +37,14 @@ public class Game implements Serializable {
     @GeneratedValue
     private Long gameId;
 
-    @Column
-    private Player player1;
-
-    @Column
-    private Player player2;
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Player> players;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Field> board;
 
     @Column
-    private int isTerminated;
+    private boolean isTerminated;
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(nullable = false, referencedColumnName = "id")
@@ -55,35 +62,30 @@ public class Game implements Serializable {
         this.gameId = gameId;
     }
 
-    public Player getPlayer1() {
-        return player1;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
+    public void setPlayers(Player player1, Player player2) {
+        this.players.add(player1);
+        this.players.add(player2);
     }
 
     public List<Field> getBoard() {
-        return board;
+        return this.board;
     }
+/*
+    public void setBoard(Field field) {
+        int posX=field.getPosX();
+        int posY=field.getPosY();
+        this.board[posX][posY]=field;
+    }*/
 
-    public void setBoard(List<Field> board) {
-        this.board = board;
-    }
-
-    public int getIsTerminated() {
+    public boolean getIsTerminated() {
         return isTerminated;
     }
 
-    public void setIsTerminated(int isTerminated) {
+    public void setIsTerminated(boolean isTerminated) {
         this.isTerminated = isTerminated;
     }
 

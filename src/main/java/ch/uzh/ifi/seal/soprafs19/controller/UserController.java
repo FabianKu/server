@@ -1,9 +1,13 @@
 package ch.uzh.ifi.seal.soprafs19.controller;
 
 import ch.uzh.ifi.seal.soprafs19.entity.User;
+import ch.uzh.ifi.seal.soprafs19.model.Invitation;
 import ch.uzh.ifi.seal.soprafs19.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 
@@ -63,6 +67,38 @@ public class UserController {
         String user_name=json.get("username");
         String date_of_birth=json.get("birthday");
         service.changeUser(userId, user_name, date_of_birth);
+    }
+
+    //INVITATIONS
+    @PostMapping("/invitation")
+    public void sendInvitation(@RequestHeader(value = "token") String token, @RequestBody Invitation invitation)throws Exception{
+        this.service.addInvitation(invitation);
+
+        //token check
+    }
+
+    @GetMapping("/invitation/{userId}")
+    public LinkedHashSet<Long> seeInvitations(@RequestHeader(value = "token") String token, @PathVariable long userId){
+        return(this.service.get_all_Invitations(userId));
+    }
+
+    @PutMapping("/invitation")
+    public void senderResponse(@RequestHeader(value = "token") String token, @RequestBody Invitation answer)throws Exception{
+        this.service.invitationResponse(answer);
+    }
+
+    //MATCHMAKING
+    @PostMapping("/matchmaking")
+    public void startMatchmaking(@RequestHeader(value = "token") String token, @RequestBody long userId){
+        this.service.startMatchmaking(userId);
+    }
+
+    @GetMapping("/matchmaking")
+    public ResponseEntity<?> isInGame(@RequestBody long userId){
+        if(this.service.isInGame(userId)){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
 

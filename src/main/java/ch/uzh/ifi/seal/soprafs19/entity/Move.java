@@ -1,37 +1,35 @@
-package ch.uzh.ifi.seal.soprafs19.model;
-
-import ch.uzh.ifi.seal.soprafs19.entity.Game;
+package ch.uzh.ifi.seal.soprafs19.entity;
 
 import javax.persistence.*;
 
 @Entity
-public class Field {
+public class Move {
 
-    //CONSTRUCTORS
-    public Field(){};
-    public Field(int posX, int posY, int heightOfBuilding, Worker worker) {
+    //CONSTRUCTOR
+    public Move(){};
+    public Move(int posX, int posY, Worker worker, long gameId) {
         this.posX = posX;
         this.posY = posY;
-        this.heightOfBuilding = heightOfBuilding;
         this.worker = worker;
+        this.gameId = gameId;
     }
 
     //ATTRIBUTES
     @Id
     @GeneratedValue
-    private long fieldId;
+    private long moveId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "gameId")
-    private Game game;
+    @OneToOne(mappedBy = "move")
+    private Action action;
 
     private int posX;
     private int posY;
-    private int heightOfBuilding;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(nullable = false, referencedColumnName = "workerId")
     private Worker worker;
+
+    private long gameId;
 
     //GETTERS AND SETTERS
     public int getPosX() {
@@ -50,14 +48,6 @@ public class Field {
         this.posY = posY;
     }
 
-    public int getHeightOfBuilding() {
-        return heightOfBuilding;
-    }
-
-    public void setHeightOfBuilding(int heightOfBuilding) {
-        this.heightOfBuilding = heightOfBuilding;
-    }
-
     public Worker getWorker() {
         return worker;
     }
@@ -65,5 +55,12 @@ public class Field {
     public void setWorker(Worker worker) {
         this.worker = worker;
     }
-}
 
+    public long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(long gameId) {
+        this.gameId = gameId;
+    }
+}
